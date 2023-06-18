@@ -42,7 +42,9 @@ const CurrentWeatherScreen = () => {
                 fontSize: 20,
                 fontWeight: 900,
                 color: 'black',
-                marginTop: -19,
+                marginTop: -10,
+                justifyContent: 'center',
+                alignItems: 'center',
               }}>
               <Text style={{fontSize: 18, fontWeight: 500, color: 'black'}}>
                 {data?.current?.temp_c}°C / {data?.current?.temp_f}°F
@@ -50,7 +52,6 @@ const CurrentWeatherScreen = () => {
 
               <Text
                 style={{
-                  textAlign: 'center',
                   fontSize: 16,
                   fontWeight: 500,
                   color: 'black',
