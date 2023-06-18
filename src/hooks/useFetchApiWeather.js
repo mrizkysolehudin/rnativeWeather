@@ -26,7 +26,7 @@ export const useFetchWeatherApi = (type, city) => {
 
   useEffect(() => {
     fetchApi();
-  }, []);
+  }, [type, city]);
 
-  return {data, isLoading};
+  return {data, isLoading, fetchApi};
 };
