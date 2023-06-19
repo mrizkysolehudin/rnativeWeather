@@ -10,6 +10,8 @@ import {useState} from 'react';
 import {useFetchWeatherApi} from '../hooks/useFetchApiWeather';
 import EntypoIcon from 'react-native-vector-icons/dist/Entypo';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import WeatherCard from '../components/WeatherCard';
+import NoResult from '../components/NoResult';
 
 const CityWeatherScreen = () => {
   const [city, setCity] = useState('jakarta');
@@ -37,7 +39,6 @@ const CityWeatherScreen = () => {
           style={{
             backgroundColor: 'white',
             shadowColor: 'gray',
-            shadowOffset: 5,
             shadowRadius: 20,
             paddingHorizontal: 10,
             borderRadius: 6,
@@ -60,57 +61,10 @@ const CityWeatherScreen = () => {
 
       {isLoading ? (
         <ActivityIndicator />
+      ) : data ? (
+        <WeatherCard item={data} />
       ) : (
-        data && (
-          <View
-            style={{
-              justifyContent: 'center',
-              alignContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text
-              style={{
-                fontSize: 30,
-                fontWeight: 900,
-                color: 'black',
-                marginTop: 80,
-              }}>
-              {data?.location?.name},
-            </Text>
-
-            <Text style={{fontSize: 30, fontWeight: 900, color: 'black'}}>
-              {data?.location?.region}, {data?.location?.country}
-            </Text>
-
-            <Image
-              source={{uri: `https:${data?.current?.condition?.icon}`}}
-              style={{width: 150, height: 150}}
-            />
-
-            <View
-              style={{
-                fontSize: 20,
-                fontWeight: 900,
-                color: 'black',
-                marginTop: -10,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{fontSize: 18, fontWeight: 500, color: 'black'}}>
-                {data?.current?.temp_c}°C / {data?.current?.temp_f}°F
-              </Text>
-
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontWeight: 500,
-                  color: 'black',
-                }}>
-                {data?.current?.condition?.text}
-              </Text>
-            </View>
-          </View>
-        )
+        <NoResult />
       )}
     </SafeAreaView>
   );
