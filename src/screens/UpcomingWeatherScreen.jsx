@@ -2,6 +2,7 @@ import {View, Text, ActivityIndicator, FlatList} from 'react-native';
 import React from 'react';
 import {useFetchWeatherApi} from '../hooks/useFetchApiWeather';
 import UpcomingWeatherCard from '../components/UpcomingWeatherCard';
+import LocationText from '../components/atoms/LocationText';
 
 const UpcomingWeatherScreen = () => {
   const {data, isLoading} = useFetchWeatherApi('forecast', 'bandung');
@@ -15,29 +16,17 @@ const UpcomingWeatherScreen = () => {
           <View
             style={{
               flex: 1,
-              justifyContent: 'space-evenly',
-              marginVertical: 160,
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: 130,
             }}>
-            <View
-              style={{
-                alignContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text
-                style={{
-                  fontSize: 30,
-                  fontWeight: 900,
-                  color: 'black',
-                }}>
-                {data?.location?.name},
-              </Text>
+            <LocationText
+              city={data?.location?.name}
+              region={data?.location?.region}
+              country={data?.location?.country}
+            />
 
-              <Text style={{fontSize: 30, fontWeight: 900, color: 'black'}}>
-                {data?.location?.region}, {data?.location?.country}
-              </Text>
-            </View>
-
-            <View style={{flexBasis: 180}}>
+            <View style={{flexBasis: 180, marginTop: 20}}>
               <FlatList
                 data={data?.forecast?.forecastday[0].hour}
                 renderItem={({item}) => <UpcomingWeatherCard item={item} />}

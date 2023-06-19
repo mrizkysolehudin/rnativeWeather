@@ -1,5 +1,6 @@
 import {View, Text, Image} from 'react-native';
 import React from 'react';
+import LocationText from './atoms/LocationText';
 
 const WeatherCard = ({item}) => {
   return (
@@ -10,19 +11,11 @@ const WeatherCard = ({item}) => {
         alignContent: 'center',
         alignItems: 'center',
       }}>
-      <Text
-        style={{
-          fontSize: 30,
-          fontWeight: 900,
-          color: 'black',
-          marginTop: -70,
-        }}>
-        {item?.location?.name},
-      </Text>
-
-      <Text style={{fontSize: 30, fontWeight: 900, color: 'black'}}>
-        {item?.location?.region}, {item?.location?.country}
-      </Text>
+      <LocationText
+        city={item?.location?.name}
+        region={item?.location?.region}
+        country={item?.location?.country}
+      />
 
       <Image
         source={{uri: `https:${item?.current?.condition?.icon}`}}
