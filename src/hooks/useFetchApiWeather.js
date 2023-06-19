@@ -4,7 +4,7 @@ import {WEATHER_API_KEY} from '../../env';
 
 const baseUrl = 'http://api.weatherapi.com/v1';
 
-export const useFetchWeatherApi = (type, city) => {
+export const useFetchWeatherApi = (type, city, days) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -13,13 +13,12 @@ export const useFetchWeatherApi = (type, city) => {
 
     try {
       const res = await axios.get(
-        `${baseUrl}/${type}.json?key=${WEATHER_API_KEY}&q=${city}`,
+        `${baseUrl}/${type}.json?key=${WEATHER_API_KEY}&q=${city} ${days}`,
       );
       setData(res.data);
 
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
       setIsLoading(false);
     }
   };

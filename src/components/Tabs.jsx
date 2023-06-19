@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import UpcomingWeatherScreen from '../screens/UpcomingWeatherScreen';
@@ -28,6 +28,7 @@ const Tabs = () => {
           fontSize: 25,
         },
         headerTitleAlign: 'center',
+        tabBarHideOnKeyboard: true,
       }}>
       <Tab.Screen
         name="Current"
